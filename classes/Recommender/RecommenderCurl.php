@@ -73,7 +73,12 @@ class RecommenderCurl
      */
     protected function getAnonymizedUserHash() : string
     {
-        return md5(Config::getField(Config::KEY_SALT) . self::dic()->user()->getLogin());
+	    $alg = 'sha512'; // new desired hashing algo
+	    if (array_search($alg,hash_algos()) === false) {
+		    $alg = 'md5'; // Fallback to md5 if $alg not included in php
+	    }
+	    print_r($alg);
+	    return hash($alg,Config::getField(Config::KEY_SALT) . self::dic()->user()->getId());
     }
 
 
