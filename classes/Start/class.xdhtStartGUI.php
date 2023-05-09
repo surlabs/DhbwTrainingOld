@@ -458,7 +458,7 @@ class xdhtStartGUI
                 return [];
             }
 
-            //$title = (new ilBasicSkill($competence["skill_node_id"]))->getLevelData($level_id)["title"];
+            $title = (new ilBasicSkill($competence["skill_node_id"]))->getLevelData($level_id)["title"];
 
             if ($title === null) {
                 return [];
