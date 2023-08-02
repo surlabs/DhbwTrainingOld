@@ -56,24 +56,32 @@ class ilObjDhbwTrainingGUI extends ilObjectPluginGUI
     const TAB_EXPORT = "export";
     const TAB_PERMISSIONS = "permissions";
     /**
-     * @var ilObjDhbwTraining
+     * #SUR# type definition
+     * @var ilObject|null
      */
-    public $object;
+    public ?ilObject $object;
     /**
      * @var ilPropertyFormGUI
      */
     protected $form;
     /**
+     * #SUR# type definition
      * @var ilTabsGUI
      */
-    protected $tabs;
+    protected ilTabsGUI $tabs;
     /**
      * @var xdhtObjectFacadeInterface
      */
     protected $facade;
 
-
-    public function executeCommand()
+    /**
+     * #SUR# return type definition
+     * @return void
+     * @throws \srag\DIC\DhbwTraining\Exception\DICException
+     * @throws ilCtrlException
+     * @throws ilException
+     */
+    public function executeCommand(): void
     {
 
         $this->setTitleAndDescription();
@@ -157,20 +165,27 @@ class ilObjDhbwTrainingGUI extends ilObjectPluginGUI
 
             case strtolower(ilLearningProgressGUI::class):
                 if ($this->facade->settings()->getLearningProgress()) {
-                    return parent::executeCommand();
+                    //#SUR# do not return
+                    parent::executeCommand();
                 } else {
                     ilUtil::sendFailure(self::plugin()->translate('permission_denied'), true);
                 }
                 break;
 
             default:
-                return parent::executeCommand();
+                //#SUR# do not return
+                parent::executeCommand();
                 break;
         }
     }
 
-
-    protected function setTabs()
+    /**
+     * #SUR# return type definition
+     * @return void
+     * @throws \srag\DIC\DhbwTraining\Exception\DICException
+     * @throws ilCtrlException
+     */
+    protected function setTabs(): void
     {
 
         if (strtolower($_GET['baseClass']) != 'iladministrationgui') {
@@ -208,14 +223,20 @@ class ilObjDhbwTrainingGUI extends ilObjectPluginGUI
         }
     }
 
-
-    function getType()
+    /**
+     * #SUR# return type definition
+     * @return string
+     */
+    function getType(): string
     {
         return ilDhbwTrainingPlugin::PLUGIN_PREFIX;
     }
 
-
-    public function edit()
+    /**
+     * #SUR# return type definition
+     * @return void
+     */
+    public function edit(): void
     {
         $this->tabs->activateTab(self::TAB_SETTINGS);
         $xdhtSettingsFormGUI = new xdhtSettingsFormGUI($this, $this->facade);
@@ -223,8 +244,13 @@ class ilObjDhbwTrainingGUI extends ilObjectPluginGUI
         $this->tpl->setContent($xdhtSettingsFormGUI->getHTML());
     }
 
-
-    public function update()
+    /**
+     * #SUR# return type definition
+     * @return void
+     * @throws \srag\DIC\DhbwTraining\Exception\DICException
+     * @throws ilCtrlException
+     */
+    public function update(): void
     {
         $this->tabs->activateTab(self::TAB_SETTINGS);
         $xdhtSettingsFormGUI = new xdhtSettingsFormGUI($this, $this->facade);
@@ -238,17 +264,21 @@ class ilObjDhbwTrainingGUI extends ilObjectPluginGUI
         $this->tpl->setContent($xdhtSettingsFormGUI->getHTML());
     }
 
-
     /**
      * Cmd that will be redirected to after creation of a new object.
+     * #SUR# return type definition
+     * @return string
      */
-    function getAfterCreationCmd()
+    function getAfterCreationCmd(): string
     {
         return self::CMD_EDIT;
     }
 
-
-    function getStandardCmd()
+    /**
+     * #SUR# return type definition
+     * @return string
+     */
+    function getStandardCmd(): string
     {
         return xdhtStartGUI::CMD_STANDARD;
     }
@@ -259,8 +289,11 @@ class ilObjDhbwTrainingGUI extends ilObjectPluginGUI
         return self::class;
     }
 
-
-    protected function afterConstructor()
+    /**
+     * #SUR# return type definition
+     * @return void
+     */
+    protected function afterConstructor(): void
     {
         global $DIC;
 
@@ -278,10 +311,17 @@ class ilObjDhbwTrainingGUI extends ilObjectPluginGUI
         $lng->loadLanguageModule('assessment');
     }
 
-
-    protected function performCommand()
+    /**
+     * #SUR# return type definition
+     * @param string $cmd
+     * @return void
+     * @throws \srag\DIC\DhbwTraining\Exception\DICException
+     * @throws ilCtrlException
+     */
+    public function performCommand(string $cmd): void
     {
-        $cmd = $this->ctrl->getCmd(xdhtStartGUI::CMD_STANDARD);
+        //#SUR# $cmd comes now from method
+        //$cmd = $this->ctrl->getCmd(xdhtStartGUI::CMD_STANDARD);
 
         switch ($cmd) {
             case self::CMD_STANDARD:
