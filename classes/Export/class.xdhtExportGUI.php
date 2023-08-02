@@ -17,6 +17,8 @@ class xdhtExportGUI extends ilExportGUI
     const CMD_INDEX = 'buildExportTableGUI';
 
     /**
+     * #SUR# component repository getPluginSlotById
+     * @return void
      * @throws ilException
      */
     public function __construct($a_parent_gui, $a_main_obj = null)
