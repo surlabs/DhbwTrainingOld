@@ -91,11 +91,12 @@ abstract class ActiveRecordConfigGUI extends ilPluginConfigGUI
 
 
     /**
+     * #SUR# return type
      * @internal
      *
      * @deprecated
      */
-    public final function executeCommand()/*: void*/
+    public function executeCommand(): void
     {
         parent::executeCommand();
     }
@@ -115,6 +116,7 @@ abstract class ActiveRecordConfigGUI extends ilPluginConfigGUI
 
 
     /**
+     * #SUR# return type
      * @param string $cmd
      *
      * @throws ActiveRecordConfigException Unknown command $cmd!
@@ -124,7 +126,7 @@ abstract class ActiveRecordConfigGUI extends ilPluginConfigGUI
      *
      * @deprecated
      */
-    public /*final*/ function performCommand(/*string*/ $cmd)/*: void*/
+    public function performCommand(string $cmd): void
     {
         $this->setTabs();
 
@@ -245,6 +247,7 @@ abstract class ActiveRecordConfigGUI extends ilPluginConfigGUI
 
 
     /**
+     * #SUR# private methods cannot be overwritten (final mark deleted)
      * @param string $tab_id
      *
      * @throws ActiveRecordConfigException Class $config_form_gui_class_name not extends ActiveRecordConfigTableGUI!
@@ -253,7 +256,7 @@ abstract class ActiveRecordConfigGUI extends ilPluginConfigGUI
      *
      * @deprecated
      */
-    private final function applyFilter(string $tab_id)/*: void*/
+    private function applyFilter(string $tab_id)/*: void*/
     {
         $table = $this->getConfigurationTable(static::$tabs[$tab_id], self::CMD_APPLY_FILTER . "_" . $tab_id, $tab_id);
 
@@ -267,6 +270,7 @@ abstract class ActiveRecordConfigGUI extends ilPluginConfigGUI
 
 
     /**
+     * #SUR# private methods cannot be overwritten (final mark deleted)
      * @param string $tab_id
      *
      * @throws ActiveRecordConfigException Class $config_gui_class_name not extends ActiveRecordConfigFormGUI, ActiveRecordObjectFormGUI or ActiveRecordConfigTableGUI!
@@ -275,7 +279,7 @@ abstract class ActiveRecordConfigGUI extends ilPluginConfigGUI
      *
      * @deprecated
      */
-    private final function configure(string $tab_id)/*: void*/
+    private function configure(string $tab_id)/*: void*/
     {
         self::dic()->tabs()->activateTab($tab_id);
 
@@ -286,6 +290,7 @@ abstract class ActiveRecordConfigGUI extends ilPluginConfigGUI
 
 
     /**
+     * #SUR# private methods cannot be overwritten (final mark deleted)
      * @param string $config_form_gui_class_name
      * @param string $tab_id
      *
@@ -298,7 +303,7 @@ abstract class ActiveRecordConfigGUI extends ilPluginConfigGUI
      *
      * @deprecated
      */
-    private final function getConfigurationFormGUI(string $config_form_gui_class_name, string $tab_id)
+    private function getConfigurationFormGUI(string $config_form_gui_class_name, string $tab_id)
     {
         if (!class_exists($config_form_gui_class_name)) {
             throw new ActiveRecordConfigException("Class $config_form_gui_class_name not exists!", ActiveRecordConfigException::CODE_INVALID_CONFIG_GUI_CLASS);
@@ -316,6 +321,7 @@ abstract class ActiveRecordConfigGUI extends ilPluginConfigGUI
 
 
     /**
+     * #SUR# private methods cannot be overwritten (final mark deleted)
      * @param string $tab_id
      *
      * @return ActiveRecordConfigFormGUI|ActiveRecordObjectFormGUI|ActiveRecordConfigTableGUI
@@ -326,7 +332,7 @@ abstract class ActiveRecordConfigGUI extends ilPluginConfigGUI
      *
      * @deprecated
      */
-    private final function getConfigurationGUI(string $tab_id)
+    private function getConfigurationGUI(string $tab_id)
     {
         $config_gui_class_name = static::$tabs[$tab_id];
 
@@ -355,6 +361,7 @@ abstract class ActiveRecordConfigGUI extends ilPluginConfigGUI
 
 
     /**
+     * #SUR# private methods cannot be overwritten (final mark deleted)
      * @param string $config_table_gui_class_name
      * @param string $parent_cmd
      * @param string $tab_id
@@ -368,7 +375,7 @@ abstract class ActiveRecordConfigGUI extends ilPluginConfigGUI
      *
      * @deprecated
      */
-    private final function getConfigurationTable(string $config_table_gui_class_name, string $parent_cmd, string $tab_id)
+    private function getConfigurationTable(string $config_table_gui_class_name, string $parent_cmd, string $tab_id)
     {
         if (!class_exists($config_table_gui_class_name)) {
             throw new ActiveRecordConfigException("Class $config_table_gui_class_name not exists!", ActiveRecordConfigException::CODE_INVALID_CONFIG_GUI_CLASS);
@@ -385,6 +392,7 @@ abstract class ActiveRecordConfigGUI extends ilPluginConfigGUI
 
 
     /**
+     * #SUR# private methods cannot be overwritten (final mark deleted)
      * @param string $tab_id
      *
      * @throws ActiveRecordConfigException Class $config_form_gui_class_name not extends ActiveRecordConfigTableGUI!
@@ -393,7 +401,7 @@ abstract class ActiveRecordConfigGUI extends ilPluginConfigGUI
      *
      * @deprecated
      */
-    private final function resetFilter(string $tab_id)/*: void*/
+    private function resetFilter(string $tab_id)/*: void*/
     {
         $table = $this->getConfigurationTable(static::$tabs[$tab_id], self::CMD_RESET_FILTER . "_" . $tab_id, $tab_id);
 
@@ -407,11 +415,12 @@ abstract class ActiveRecordConfigGUI extends ilPluginConfigGUI
 
 
     /**
+     * #SUR# private methods cannot be overwritten (final mark deleted)
      * @internal
      *
      * @deprecated
      */
-    private final function setTabs()/*: void*/
+    private function setTabs()/*: void*/
     {
         foreach (static::$tabs as $tab_id => $config_gui_class_name) {
             if (in_array($config_gui_class_name, static::$custom_commands)) {
@@ -426,6 +435,7 @@ abstract class ActiveRecordConfigGUI extends ilPluginConfigGUI
 
 
     /**
+     * #SUR# private methods cannot be overwritten (final mark deleted)
      * @param string $tab_id
      *
      * @throws ActiveRecordConfigException Class $config_gui_class_name not extends ActiveRecordConfigFormGUI or ActiveRecordObjectFormGUI!
@@ -434,7 +444,7 @@ abstract class ActiveRecordConfigGUI extends ilPluginConfigGUI
      *
      * @deprecated
      */
-    private final function updateConfigure(string $tab_id)/*: void*/
+    private function updateConfigure(string $tab_id)/*: void*/
     {
         self::dic()->tabs()->activateTab($tab_id);
 
