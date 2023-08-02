@@ -31,13 +31,12 @@ class xdhtExportTableGUI extends ilExportTableGUI
         //$this->addCustomColumn($this->lng->txt('actions'), $this, 'formatActionsList');
     }
 
-
     /**
-     * @param string $column
-     *
+     * #SUR# Return type declaration
+     * @param $column
      * @return bool
      */
-    public function numericOrdering($column)
+    public function numericOrdering($column): bool
     {
         if (in_array($column, array('size', 'date'))) {
             return true;
@@ -76,19 +75,21 @@ class xdhtExportTableGUI extends ilExportTableGUI
         }*/
 
 
-    /***
-     *
+    /**
+     * #SUR# Return type declaration
+     * @return void
      */
-    protected function initMultiCommands()
+    protected function initMultiCommands(): void
     {
         $this->addMultiCommand('confirmDeletion', $this->lng->txt('delete'));
     }
 
 
     /**
-     *
+     * #SUR# Return type declaration
+     * @return void
      */
-    protected function initColumns()
+    protected function initColumns(): void
     {
         $this->addColumn($this->lng->txt(''), '', '1', true);
         $this->addColumn($this->lng->txt('file'), 'file');
@@ -96,13 +97,12 @@ class xdhtExportTableGUI extends ilExportTableGUI
         $this->addColumn($this->lng->txt('date'), 'timestamp');
     }
 
-
     /**
+     * #SUR# Return type declaration
      * @param array $row
-     *
      * @return string
      */
-    protected function getRowId(array $row)
+    protected function getRowId(array $row): string
     {
         return $row['file'];
     }
