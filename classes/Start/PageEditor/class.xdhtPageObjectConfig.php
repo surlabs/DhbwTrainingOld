@@ -16,9 +16,10 @@ class xdhtPageObjectConfig extends ilPageConfig
 
 
     /**
-     * @inheritDoc
+     * #SUR# return type definition
+     * @return void
      */
-    public function init()/*:void*/
+    public function init(): void
     {
         // config
         $this->setPreventHTMLUnmasking(true);

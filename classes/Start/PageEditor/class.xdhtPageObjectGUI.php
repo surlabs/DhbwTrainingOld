@@ -63,11 +63,14 @@ class xdhtPageObjectGUI extends ilPageObjectGUI
         }
     }
 
-
     /**
+     * #SUR# return type definition, direct return
+     * @return string
      * @inheritDoc
+     * @throws \srag\DIC\DhbwTraining\Exception\DICException
+     * @throws ilTemplateException
      */
-    public function executeCommand()/*:void*/
+    public function executeCommand(): string
     {
         self::dic()->tabs()->activateSubTab(xdhtStartGUI::TAB_EDIT_PAGE);
 
@@ -84,6 +87,7 @@ class xdhtPageObjectGUI extends ilPageObjectGUI
         $this->fixTabs();
 
         self::output()->output($html, true);
+        return;
     }
 
 
