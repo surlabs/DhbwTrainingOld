@@ -77,17 +77,14 @@ class xdhtPageObjectGUI extends ilPageObjectGUI
         if (!self::dic()->access()->checkAccess("write", "", $this->facade->refId())) {
             ilUtil::sendFailure(self::plugin()->translate('permission_denied'));
 
-            self::output()->output("", true);
-
-            return;
+            return self::output()->output("", true);
         }
 
         $html = strval(parent::executeCommand());
 
         $this->fixTabs();
 
-        self::output()->output($html, true);
-        return;
+        return self::output()->output($html, true);
     }
 
 
