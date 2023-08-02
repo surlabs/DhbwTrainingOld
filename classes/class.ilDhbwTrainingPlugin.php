@@ -29,32 +29,14 @@ class ilDhbwTrainingPlugin extends ilRepositoryObjectPlugin
      */
     public static function getInstance()
     {
+        global $DIC;
+        /** @var ilComponentFactory $component_factory */
+        $component_factory = $DIC["component.factory"];
+        return $component_factory->getPlugin('xdht');
+
         if (!isset(self::$instance)) {
-            // init the plugin object
-            try {
-                global $DIC;
 
-                /** @var ilComponentRepository $component_repository */
-                $component_repository = $DIC["component.repository"];
-
-                $info = null;
-                try {
-                    $info = $component_repository->getPluginByName(self::PLUGIN_NAME);
-                } catch (InvalidArgumentException $e) {
-                    ilUtil::sendFailure($e, true);
-                }
-
-                /** @var ilComponentFactory $component_factory */
-                $component_factory = $DIC["component.factory"];
-
-                $plugin_obj = $component_factory->getPlugin($info->getId());
-
-                if ($info->isActive()) {
-                    self::$instance = $plugin_obj;
-                }
-            } catch (ilPluginException $e) {
-                ilUtil::sendFailure($e, true);
-            }
+            self::$instance = new self(array(), 0, true);
         }
 
         return self::$instance;
