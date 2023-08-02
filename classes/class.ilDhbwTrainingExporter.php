@@ -9,13 +9,23 @@
 class ilDhbwTrainingExporter extends ilXmlExporter
 {
 
-    public function init()
+    /**
+     * #SUR# return type definition
+     * @return void
+     */
+    public function init(): void
     {
         // TODO: Implement init() method.
     }
 
-
-    public function getXmlRepresentation($a_entity, $a_schema_version, $a_id)
+    /**
+     * #SUR# return type definition
+     * @param $a_entity
+     * @param $a_schema_version
+     * @param $a_id
+     * @return string
+     */
+    public function getXmlRepresentation($a_entity, $a_schema_version, $a_id): string
     {
 
         $xml = '';
@@ -29,8 +39,12 @@ class ilDhbwTrainingExporter extends ilXmlExporter
         return $xml;
     }
 
-
-    public function getValidSchemaVersions($a_entity)
+    /**
+     * #SUR# return type definition
+     * @param $a_entity
+     * @return array
+     */
+    public function getValidSchemaVersions($a_entity): array
     {
         return array(
             "5.2.0" => array(
