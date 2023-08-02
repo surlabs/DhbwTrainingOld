@@ -101,26 +101,31 @@ class xdhtParticipant extends ActiveRecord implements xdhtParticipantInterface
      */
     protected $old_status;
 
-
     /**
+     * #SUR# return type definition
      * @return string
      */
-    public static function returnDbTableName()
+    public static function returnDbTableName(): string
     {
         return self::TABLE_NAME;
     }
 
 
     /**
+     * #SUR# return type definition
      * @return string
      */
-    public function getConnectorContainerName()
+    public function getConnectorContainerName(): string
     {
         return self::TABLE_NAME;
     }
 
 
-    public function create()
+    /**
+     * #SUR# return type definition
+     * @return void
+     */
+    public function create(): void
     {
         global $ilUser;
 

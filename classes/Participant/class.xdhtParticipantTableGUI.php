@@ -13,18 +13,22 @@ class xdhtParticipantTableGUI extends ilTable2GUI
     use DICTrait;
     const PLUGIN_CLASS_NAME = ilDhbwTrainingPlugin::class;
     const TBL_ID = 'tbl_xdht_participants';
+
     /**
      * @var xdhtParticipant
      */
     public $xdht_participant;
+
     /**
      * @var array
      */
     protected $filter = [];
+
     /**
-     * @var xdhtParticipantGUI
+     * #SUR# type ?object
      */
-    protected $parent_obj;
+    protected ?object $parent_obj;
+
     /**
      * @var xdhtObjectFacadeInterface
      */
@@ -77,8 +81,12 @@ class xdhtParticipantTableGUI extends ilTable2GUI
         }
     }
 
-
-    public function getSelectableColumns()
+    /**
+     * #SUR# return type definition
+     * @return array
+     * @throws \srag\DIC\DhbwTraining\Exception\DICException
+     */
+    public function getSelectableColumns(): array
     {
         $cols["full_name"] = array(
             "txt"     => self::plugin()->translate("participant_name"),
@@ -174,11 +182,14 @@ class xdhtParticipantTableGUI extends ilTable2GUI
         $this->setData($collection->getArray());
     }
 
-
     /**
-     * @param array $a_set
+     * #SUR# return type definition
+     * @param $a_set
+     * @return void
+     * @throws ilDateTimeException
+     * @throws ilTemplateException
      */
-    public function fillRow($a_set)
+    public function fillRow($a_set): void
     {
         /**
          * @var xdhtParticipant $xdhtParticipant
