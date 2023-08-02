@@ -8,7 +8,15 @@
 class ilDhbwTrainingImporter extends ilXmlImporter
 {
 
-    public function importXmlRepresentation($a_entity, $a_id, $a_xml, $a_mapping)
+    /**
+     * #SUR# return type definition
+     * @param $a_entity
+     * @param $a_id
+     * @param $a_xml
+     * @param $a_mapping
+     * @return void
+     */
+    public function importXmlRepresentation($a_entity, $a_id, $a_xml, $a_mapping): void
     {
         $this->createTrainingSettingFromXMLString($a_xml);
     }
