@@ -15,14 +15,20 @@ class ilObjDhbwTrainingListGUI extends ilObjectPluginListGUI
     use DICTrait;
     const PLUGIN_CLASS_NAME = ilDhbwTrainingPlugin::class;
 
-
-    function getGuiClass()
+    /**
+     * #SUR# return type definition
+     * @return string
+     */
+    function getGuiClass(): string
     {
         return ilObjDhbwTrainingGUI::class;
     }
 
-
-    function initCommands()
+    /**
+     * #SUR# return type definition
+     * @return array
+     */
+    function initCommands(): array
     {
         $this->timings_enabled = true;
         $this->subscribe_enabled = false;
@@ -63,7 +69,12 @@ class ilObjDhbwTrainingListGUI extends ilObjectPluginListGUI
      *                        "property" (string) => property name
      *                        "value" (string) => property value
      */
-    function getProperties()
+
+    /**
+     * #SUR# return type definition
+     * @return array
+     */
+    function getProperties(): array
     {
         global $lng;
 
