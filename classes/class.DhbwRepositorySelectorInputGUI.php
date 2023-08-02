@@ -30,11 +30,15 @@ class DhbwRepositorySelectorInputGUI extends ilRepositorySelectorInputGUI
         //parent::__construct();
     }
 
-
     /**
-     * overwrittes the ctrl flow
+     * overwrites the ctrl flow
+     * #SUR# return type definition
+     * @param string $a_mode
+     * @return string
+     * @throws ilCtrlException
+     * @throws ilTemplateException
      */
-    function render($a_mode = "property_form")
+    function render($a_mode = "property_form"): string
     {
         global $lng, $ilCtrl, $ilObjDataCache, $tree;
 
@@ -84,8 +88,12 @@ class DhbwRepositorySelectorInputGUI extends ilRepositorySelectorInputGUI
 
     /**
      * has to be overwritten to set only question pool repository objects on the white list
+     * #SUR# return type definition
+     * @return void
+     * @throws ilCtrlException
+     * @throws ilTemplateException
      */
-    function showRepositorySelection()
+    function showRepositorySelection(): void
     {
         global $tpl, $lng, $ilCtrl, $tree, $ilUser;
 
