@@ -1,6 +1,7 @@
 <?php
 
-use srag\DIC\DhbwTraining\DICTrait;
+//#SUR# composer fail
+//use srag\DIC\DhbwTraining\DICTrait;
 use srag\Plugins\DhbwTraining\Config\Config;
 
 
@@ -12,8 +13,8 @@ use srag\Plugins\DhbwTraining\Config\Config;
  */
 class RecommenderCurl
 {
-
-    use DICTrait;
+    //#SUR# composer fail
+    //use DICTrait;
 
     const PLUGIN_CLASS_NAME = ilDhbwTrainingPlugin::class;
     const KEY_RESPONSE_TIME_START = ilDhbwTrainingPlugin::PLUGIN_PREFIX . "_response_time_start";

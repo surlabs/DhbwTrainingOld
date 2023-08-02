@@ -1,6 +1,6 @@
 <?php
-
-use srag\DIC\DhbwTraining\DICTrait;
+//#SUR# composer fail
+//use srag\DIC\DhbwTraining\DICTrait;
 use srag\Plugins\DhbwTraining\RecommenderSystem\Common\Domain\Aggregate\Model\Guid;
 use srag\Plugins\DhbwTraining\RecommenderSystem\RcSGateway;
 
@@ -12,8 +12,8 @@ use srag\Plugins\DhbwTraining\RecommenderSystem\RcSGateway;
  */
 class RecommenderResponse
 {
-
-    use DICTrait;
+    //#SUR# composer fail
+    //use DICTrait;
 
     const PLUGIN_CLASS_NAME = ilDhbwTrainingPlugin::class;
     const STATUS_SUCCESS = "success";
