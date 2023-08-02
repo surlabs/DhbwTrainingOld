@@ -24,36 +24,71 @@ class ilDhbwTrainingPlugin extends ilRepositoryObjectPlugin
 
 
     /**
+     * #SUR# Plugin object initialization
      * @return ilDhbwTrainingPlugin
      */
     public static function getInstance()
     {
         if (!isset(self::$instance)) {
-            self::$instance = new self();
+            // init the plugin object
+            try {
+                global $DIC;
+
+                /** @var ilComponentRepository $component_repository */
+                $component_repository = $DIC["component.repository"];
+
+                $info = null;
+                try {
+                    $info = $component_repository->getPluginByName(self::PLUGIN_NAME);
+                } catch (InvalidArgumentException $e) {
+                    ilUtil::sendFailure($e, true);
+                }
+
+                /** @var ilComponentFactory $component_factory */
+                $component_factory = $DIC["component.factory"];
+
+                $plugin_obj = $component_factory->getPlugin($info->getId());
+
+                if ($info->isActive()) {
+                    self::$instance = $plugin_obj;
+                }
+            } catch (ilPluginException $e) {
+                ilUtil::sendFailure($e, true);
+            }
         }
 
         return self::$instance;
     }
 
 
-    function getPluginName()
+    /**
+     * #SUR# return type definition
+     * @return string
+     */
+    function getPluginName(): string
     {
         return self::PLUGIN_NAME;
     }
 
-
-    protected function uninstallCustom()
+    /**
+     * #SUR# return type definition
+     * @return void
+     * @throws \srag\DIC\DhbwTraining\Exception\DICException
+     */
+    protected function uninstallCustom(): void
     {
         self::dic()->database()->dropTable(Config::TABLE_NAME, false);
         self::dic()->database()->dropTable(xdhtSettings::TABLE_NAME, false);
         self::dic()->database()->dropTable(xdhtParticipant::TABLE_NAME, false);
     }
 
-
     /**
      * Before activation processing
+     * #SUR# return type definition
+     * @return bool
+     * @throws ilPluginException
      */
-    protected function beforeActivation()
+    protected function beforeActivation(): bool
     {
         global $ilDB, $DIC;
         parent::beforeActivation();
