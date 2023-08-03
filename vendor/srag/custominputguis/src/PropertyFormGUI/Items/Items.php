@@ -103,7 +103,8 @@ final class Items
 
                     $item->setValue($key);
                 } else {
-                    if (!$field["setTitle"]) {
+                    //#SUR# isset
+                    if (isset($field["setTitle"]) and !$field["setTitle"]) {
                         $item->setTitle($parent->txt($key));
                     }
 
@@ -111,7 +112,8 @@ final class Items
                 }
             }
 
-            if (!$field["setInfo"]) {
+            //#SUR# isset
+            if (isset($field["setInfo"]) and !$field["setInfo"]) {
                 $item->setInfo($parent->txt($key . "_info", ""));
             }
         }
