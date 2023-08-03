@@ -9,6 +9,7 @@ use srag\Plugins\DhbwTraining\Config\ConfigFormGUI;
  * Class ilDhbwTrainingConfigGUI
  *
  * @author studer + raimann ag - Team Custom 1 <support-custom1@studer-raimann.ch>
+ * @ilCtrl_IsCalledBy  ilDhbwTrainingConfigGUI: ilObjComponentSettingsGUI
  */
 class ilDhbwTrainingConfigGUI extends ActiveRecordConfigGUI
 {
