@@ -1,6 +1,7 @@
 <?php
 
-use srag\DIC\DhbwTraining\DICTrait;
+//#SUR# composer fail
+//use srag\DIC\DhbwTraining\DICTrait;
 use srag\Plugins\DhbwTraining\Config\Config;
 
 
@@ -12,8 +13,8 @@ use srag\Plugins\DhbwTraining\Config\Config;
  */
 class RecommenderCurl
 {
-
-    use DICTrait;
+    //#SUR# composer fail
+    //use DICTrait;
 
     const PLUGIN_CLASS_NAME = ilDhbwTrainingPlugin::class;
     const KEY_RESPONSE_TIME_START = ilDhbwTrainingPlugin::PLUGIN_PREFIX . "_response_time_start";
@@ -73,11 +74,11 @@ class RecommenderCurl
      */
     protected function getAnonymizedUserHash() : string
     {
-	    $alg = 'sha256'; // put new desired hashing algo here
-	    if (array_search($alg,hash_algos()) === false) {
-		    $alg = 'md5'; // Fallback to md5 if $alg not included in php
-	    }
-	    return hash($alg,Config::getField(Config::KEY_SALT) . self::dic()->user()->getId());
+        $alg = 'sha256'; // put new desired hashing algo here
+        if (array_search($alg,hash_algos()) === false) {
+            $alg = 'md5'; // Fallback to md5 if $alg not included in php
+        }
+        return hash($alg,Config::getField(Config::KEY_SALT) . self::dic()->user()->getId());
     }
 
 
@@ -216,7 +217,7 @@ class RecommenderCurl
                 $this->response->setProgressmeters((array) $progress_meter_list);
             } else {
                 if(strlen(ilSession::get(self::KEY_RESPONSE_PROGRESS_METER)) > 0) {
-                   $this->response->setProgressmeters((array) unserialize(ilSession::get(self::KEY_RESPONSE_PROGRESS_METER)));
+                    $this->response->setProgressmeters((array) unserialize(ilSession::get(self::KEY_RESPONSE_PROGRESS_METER)));
                 }
             }
 
