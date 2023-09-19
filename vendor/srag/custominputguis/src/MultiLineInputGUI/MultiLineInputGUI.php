@@ -399,10 +399,11 @@ class MultiLineInputGUI extends ilFormPropertyGUI implements ilTableFilterItem, 
      */
     public function insert(ilTemplate $tpl)/*: void*/
     {
+        global $ilUser;
         $options = [
             // Services/Calendar/classes/class.ilCalendarUtil.php::addDateTimePicker
             "date_config" => [
-                'locale'           => self::dic()->user()->getLanguage(),
+                'locale'           => $ilUser->getLanguage(),
                 'stepping'         => 5,
                 'useCurrent'       => false,
                 'calendarWeeks'    => true,
@@ -413,8 +414,8 @@ class MultiLineInputGUI extends ilFormPropertyGUI implements ilTableFilterItem, 
                 'keepInvalid'      => true,
                 'sideBySide'       => true,
                 //'collapse' => false,
-                'format'           => !empty(self::dic()->user()->getId())
-                && intval(self::dic()->user()->getId()) !== ANONYMOUS_USER_ID ? ilCalendarUtil::getUserDateFormat(false) : "DD.MM.YYYY"
+                'format'           => !empty($ilUser->getId())
+                && intval($ilUser->getId()) !== ANONYMOUS_USER_ID ? ilCalendarUtil::getUserDateFormat(false) : "DD.MM.YYYY"
             ]
         ];
 

@@ -3,7 +3,7 @@
 require_once __DIR__ . "/vendor/srag/dic/src/PHPVersionChecker.php";
 
 $id = "xdht";
-$version = "2.0.6";
+$version = "2.0.7";
 $ilias_min_version = "6.0";
 $ilias_max_version = "7.999";
 $responsible = "fluxlabs ag";

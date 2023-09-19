@@ -70,6 +70,8 @@ class MultiSelectSearchInputGUI extends ilMultiSelectInputGUI implements ilTable
      */
     public function __construct(string $title = "", string $post_var = "")
     {
+        global $ilUser;
+
         if (substr($post_var, -2) != "[]") {
             $post_var = $post_var . "[]";
         }
@@ -79,7 +81,7 @@ class MultiSelectSearchInputGUI extends ilMultiSelectInputGUI implements ilTable
         $dir = "./" . substr($dir, strpos($dir, "/Customizing/") + 1);
 
         self::dic()->ui()->mainTemplate()->addJavaScript($dir . "/../../node_modules/select2/dist/js/select2.full.min.js");
-        self::dic()->ui()->mainTemplate()->addJavaScript($dir . "/../../node_modules/select2/dist/js/i18n/" . self::dic()->user()->getCurrentLanguage()
+        self::dic()->ui()->mainTemplate()->addJavaScript($dir . "/../../node_modules/select2/dist/js/i18n/" . $ilUser->getCurrentLanguage()
             . ".js");
         self::dic()->ui()->mainTemplate()->addCss($dir . "/../../node_modules/select2/dist/css/select2.min.css");
         self::dic()->ui()->mainTemplate()->addCss($dir . "/css/multiselectsearchinputgui.css");

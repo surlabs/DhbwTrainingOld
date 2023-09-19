@@ -112,11 +112,12 @@ class xdhtStartGUI
      */
     public function proceedWithReturnOfRecommender()
     {
+        global $ilUser;
         $output = "";
 
         if ($this->facade->settings()->getLearningProgress() && $this->response->getLearningProgressStatus() !== null) {
             $this->facade->xdhtParticipantFactory()->updateStatus($this->facade->xdhtParticipantFactory()
-                ->findOrCreateParticipantByUsrAndTrainingObjectId(self::dic()->user()
+                ->findOrCreateParticipantByUsrAndTrainingObjectId($ilUser
                     ->getId(), $this->facade->objectId()), $this->response->getLearningProgressStatus());
         }
 
@@ -127,10 +128,10 @@ class xdhtStartGUI
                 $set = $ilDB->query($sql);
                 $row = $ilDB->fetchAssoc($set);
 
-                ilPersonalSkill::addPersonalSkill(self::dic()->user()->getId(), $competence_id);
+                ilPersonalSkill::addPersonalSkill($ilUser->getId(), $competence_id);
                 ilBasicSkill::writeUserSkillLevelStatus(
                     $row['id'],
-                    self::dic()->user()->getId(),
+                    $ilUser->getId(),
                     $this->facade->refId(),
                     $competence_id,
                     ilBasicSkill::ACHIEVED,
@@ -208,6 +209,8 @@ class xdhtStartGUI
      */
     protected function initAnsweredQuestionForm($question) : ilTemplate
     {
+        global $ilUser;
+
         $tpl = new ilTemplate('tpl.questions_answered_form.html', true, true, 'Customizing/global/plugins/Services/Repository/RepositoryObject/DhbwTraining');
         $tpl->setVariable("ACTION", self::dic()->ctrl()->getLinkTarget($this, self::CMD_SENDRATING));
         $q_gui = assQuestionGUI::_getQuestionGUI("", $question['question_id']);
@@ -217,14 +220,14 @@ class xdhtStartGUI
 
             return $tpl;
         }
-        $previewSession = new ilAssQuestionPreviewSession(self::dic()->user()->getId(), $question['question_id']);
+        $previewSession = new ilAssQuestionPreviewSession($ilUser->getId(), $question['question_id']);
         $q_gui->setPreviewSession($previewSession);
 
         /**
          * shuffle like before
          */
         $shuffler = new ilArrayElementShuffler();
-        $shuffler->setSeed($q_gui->object->getId() + self::dic()->user()->getId());
+        $shuffler->setSeed($q_gui->object->getId() + $ilUser->getId());
         $q_gui->object->setShuffle(1);
         $q_gui->object->setShuffler($shuffler);
 
@@ -260,6 +263,8 @@ class xdhtStartGUI
      */
     protected function initQuestionForm($question) : ilTemplate
     {
+        global $ilUser;
+
         $tpl = new ilTemplate('tpl.questions_form.html', true, true, 'Customizing/global/plugins/Services/Repository/RepositoryObject/DhbwTraining');
         $tpl->setVariable("ACTION", self::dic()->ctrl()->getLinkTarget($this, self::CMD_ANSWER));
 
@@ -271,7 +276,7 @@ class xdhtStartGUI
             return $tpl;
         }
 
-        $previewSession = new ilAssQuestionPreviewSession(self::dic()->user()->getId(), $question['question_id']);
+        $previewSession = new ilAssQuestionPreviewSession($ilUser->getId(), $question['question_id']);
 
         $previewSession->init();
         $q_gui->setPreviewSession($previewSession);
@@ -280,7 +285,7 @@ class xdhtStartGUI
          * Shuffle!
          */
         $shuffler = new ilArrayElementShuffler();
-        $shuffler->setSeed($q_gui->object->getId() + self::dic()->user()->getId());
+        $shuffler->setSeed($q_gui->object->getId() + $ilUser->getId());
         $q_gui->object->setShuffle(1);
         $q_gui->object->setShuffler($shuffler);
 
@@ -406,8 +411,8 @@ class xdhtStartGUI
      */
     public function setAnsweredForPreviewSession($question) : bool
     {
-
-        $previewSession = new ilAssQuestionPreviewSession(self::dic()->user()->getId(), $question['question_id']);
+        global $ilUser;
+        $previewSession = new ilAssQuestionPreviewSession($ilUser->getId(), $question['question_id']);
 
         $q_gui = assQuestionGUI::_getQuestionGUI("", $question['question_id']);
         if(is_object($q_gui )) {
@@ -448,11 +453,12 @@ class xdhtStartGUI
      */
     protected function renderCompetences()/*:void*/
     {
+
         self::dic()->ui()->mainTemplate()->setRightContent(self::output()->getHTML(self::dic()->ui()->factory()->listing()->descriptive(array_reduce(ilPersonalSkill::getSelectedUserSkills(self::dic()
             ->user()
             ->getId()), function (array $items, array $competence) : array {
-
-            $level_id = ilPersonalSkill::getSelfEvaluation(self::dic()->user()->getId(), $competence["skill_node_id"], 0, $competence["skill_node_id"]);
+            global $ilUser;
+            $level_id = ilPersonalSkill::getSelfEvaluation($ilUser->getId(), $competence["skill_node_id"], 0, $competence["skill_node_id"]);
 
             if ($level_id === null) {
                 return [];
@@ -464,7 +470,7 @@ class xdhtStartGUI
                 return [];
             }
 
-            $items[$competence["title"]] = (new ilBasicSkill($competence["skill_node_id"]))->getLevelData(ilPersonalSkill::getSelfEvaluation(self::dic()->user()->getId(), $competence["skill_node_id"],
+            $items[$competence["title"]] = (new ilBasicSkill($competence["skill_node_id"]))->getLevelData(ilPersonalSkill::getSelfEvaluation($ilUser->getId(), $competence["skill_node_id"],
                 0, $competence["skill_node_id"]))["title"];
 
             return $items;

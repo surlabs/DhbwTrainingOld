@@ -91,13 +91,15 @@ class MultiSelectSearchNewInputGUI extends ilFormPropertyGUI implements ilTableF
             $dir = __DIR__;
             $dir = "./" . substr($dir, strpos($dir, "/Customizing/") + 1);
 
+            global $ilUser;
+
             self::dic()->ui()->mainTemplate()->addCss($version_parameter->appendToUrl($dir . "/../../node_modules/select2/dist/css/select2.min.css"));
 
             self::dic()->ui()->mainTemplate()->addCss($version_parameter->appendToUrl($dir . "/css/multi_select_search_new_input_gui.css"));
 
             self::dic()->ui()->mainTemplate()->addJavaScript($version_parameter->appendToUrl($dir . "/../../node_modules/select2/dist/js/select2.full.min.js"));
 
-            self::dic()->ui()->mainTemplate()->addJavaScript($version_parameter->appendToUrl($dir . "/../../node_modules/select2/dist/js/i18n/" . self::dic()->user()->getCurrentLanguage()
+            self::dic()->ui()->mainTemplate()->addJavaScript($version_parameter->appendToUrl($dir . "/../../node_modules/select2/dist/js/i18n/" . $ilUser->getCurrentLanguage()
                 . ".js"));
         }
     }

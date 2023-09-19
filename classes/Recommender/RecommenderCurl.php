@@ -74,11 +74,12 @@ class RecommenderCurl
      */
     protected function getAnonymizedUserHash() : string
     {
+        global $ilUser;
         $alg = 'sha256'; // put new desired hashing algo here
         if (array_search($alg,hash_algos()) === false) {
             $alg = 'md5'; // Fallback to md5 if $alg not included in php
         }
-        return hash($alg,Config::getField(Config::KEY_SALT) . self::dic()->user()->getId());
+        return hash($alg,Config::getField(Config::KEY_SALT) . $ilUser->getId());
     }
 
 
