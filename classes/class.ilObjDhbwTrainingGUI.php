@@ -59,7 +59,7 @@ class ilObjDhbwTrainingGUI extends ilObjectPluginGUI
      * #SUR# type definition
      * @var ilObject|null
      */
-    public ?ilObject $object;
+    public ?ilObject $object = null;
     /**
      * @var ilPropertyFormGUI
      */
