@@ -55,11 +55,9 @@ class ilObjDhbwTrainingGUI extends ilObjectPluginGUI
     const TAB_LEARNING_PROGRESS = "learning_progress";
     const TAB_EXPORT = "export";
     const TAB_PERMISSIONS = "permissions";
-    /**
-     * #SUR# type definition
-     * @var ilObject|null
-     */
+    /* #SUR# is not necessary
     public ?ilObject $object = null;
+    */
     /**
      * @var ilPropertyFormGUI
      */
@@ -302,7 +300,9 @@ class ilObjDhbwTrainingGUI extends ilObjectPluginGUI
             $this->object = $this->facade->training_object();
         }
         $this->dic = $DIC;
-        $this->access = new ilObjDhbwTrainingAccess();
+       /* #SUR# is not necessary
+       $this->access = new ilObjDhbwTrainingAccess();
+        */
         $this->pl = ilDhbwTrainingPlugin::getInstance();
         $this->tabs = $DIC->tabs();
         $this->ctrl = $DIC->ctrl();
