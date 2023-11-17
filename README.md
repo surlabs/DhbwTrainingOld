@@ -1,6 +1,6 @@
 ILIAS-Plugin DhbwTraining
 ============
-This is a fork created by SURLABS of the FLUXLABS' SrGeogebra Plugin for ILIAS
+This is a fork created by SURLABS of the ingoj DhbwTraining Plugin for ILIAS
 
 This version is valid for ILIAS8 with PHP 7.4 and 8.0
 
