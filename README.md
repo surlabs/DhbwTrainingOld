@@ -1,20 +1,17 @@
 ILIAS-Plugin DhbwTraining
 ============
-![GitHub release (latest SemVer)](https://img.shields.io/github/v/release/fluxapps/DhbwTraining?style=flat-square)
-![GitHub closed issues](https://img.shields.io/github/issues-closed/fluxapps/DhbwTraining?style=flat-square&color=success)
-[![GitHub issues](https://img.shields.io/github/issues/fluxapps/DhbwTraining?style=flat-square&color=yellow)](https://github.com/fluxapps/DhbwTraining/issues)
-![GitHub closed pull requests](https://img.shields.io/github/issues-pr-closed/fluxapps/DhbwTraining?style=flat-square&color=success)
-![GitHub pull requests](https://img.shields.io/github/issues-pr/fluxapps/DhbwTraining?style=flat-square&color=yellow)
-[![GitHub forks](https://img.shields.io/github/forks/fluxapps/DhbwTraining?style=flat-square&color=blueviolet)](https://github.com/fluxapps/DhbwTraining/network)
-[![GitHub stars](https://img.shields.io/github/stars/fluxapps/DhbwTraining?style=flat-square&color=blueviolet)](https://github.com/fluxapps/DhbwTraining/stargazers)
-[![GitHub license](https://img.shields.io/github/license/fluxapps/DhbwTraining?style=flat-square)](https://github.com/fluxapps/DhbwTraining/blob/main/LICENSE.md)
+This is a fork created by SURLABS of the FLUXLABS' SrGeogebra Plugin for ILIAS
+
+This version is valid for ILIAS8 with PHP 7.4 and 8.0
+
+SURLABS is not responsible for the plugin
 
 ## Installation
 Start at your ILIAS root directory
 ```bash
 mkdir -p Customizing/global/plugins/Services/Repository/RepositoryObject
 cd Customizing/global/plugins/Services/Repository/RepositoryObject
-git clone https://github.com/surlabs/DhbwTraining.git
+git clone https://github.com/surlabs/DhbwTraining.git DhbwTraining
 ```
 As ILIAS administrator go to "Administration->Plugins" and install/activate the plugin.  
 
@@ -46,18 +43,10 @@ As ILIAS administrator go to "Administration->Plugins" and install/activate the 
 ![](docs/Progressmeter.png)
 
 ### Requirements
-* ILIAS 6.0
-* PHP >=7.0
+* ILIAS 8.0
+* PHP =7.4 or 8.0
 * Recommender Phython Software
 
 ### Maintenance
-fluxlabs ag, support@fluxlabs.ch
-
-This project is maintained by fluxlabs.
-
-### About fluxlabs plugins
-
-Please also have a look at our other key projects and their [MAINTENANCE](https://github.com/fluxapps/docs/blob/8ce4309b0ac64c039d29204c2d5b06723084c64b/assets/MAINTENANCE.png).
-
-The plugins that require a rebuild and the costs are listed here: [REBUILDS](https://github.com/fluxapps/docs/blob/8ce4309b0ac64c039d29204c2d5b06723084c64b/assets/REBUILDS.png)
+This project is maintained by Surlabs S.L. info@surlabs.es
 
