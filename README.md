@@ -4,7 +4,6 @@ This is a fork created by SURLABS of the ingoj DhbwTraining Plugin for ILIAS
 
 This version is valid for ILIAS6 and ILIAS7 with PHP 7.0 or 7.4
 
-SURLABS is not responsible for the plugin
 
 ## Installation
 Start at your ILIAS root directory
