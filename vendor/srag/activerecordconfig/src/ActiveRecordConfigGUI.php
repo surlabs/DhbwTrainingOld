@@ -446,6 +446,8 @@ abstract class ActiveRecordConfigGUI extends ilPluginConfigGUI
      */
     private function updateConfigure(string $tab_id)/*: void*/
     {
+        global $DIC;
+        $tpl = $DIC->ui()->mainTemplate();
         self::dic()->tabs()->activateTab($tab_id);
 
         $form = $this->getConfigurationFormGUI(static::$tabs[$tab_id], $tab_id);
@@ -456,8 +458,8 @@ abstract class ActiveRecordConfigGUI extends ilPluginConfigGUI
             return;
         }
 
-        ilUtil::sendSuccess($this->txt($tab_id . "_saved"), true);
-
+        //ilUtil::sendSuccess($this->txt($tab_id . "_saved"), true);
+        $tpl->setOnScreenMessage('success',$this->txt($tab_id . "_saved"),true);
         $this->redirectToTab($tab_id);
     }
 }

@@ -99,7 +99,8 @@ class DhbwRepositorySelectorInputGUI extends ilRepositorySelectorInputGUI
 
         $ilCtrl->setParameter($this, "postvar", $this->getPostVar());
 
-        ilUtil::sendInfo($this->getHeaderMessage());
+        //ilUtil::sendInfo($this->getHeaderMessage());
+        $tpl->setOnScreenMessage('info',$this->getHeaderMessage(),true);
 
         $exp = new ilRepositorySelectorExplorerGUI($this, "showRepositorySelection",
             $this, "selectRepositoryItem", "root_id");

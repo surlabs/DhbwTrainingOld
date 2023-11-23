@@ -46,6 +46,8 @@ class xdhtParticipantGUI
 
     protected function performCommand()
     {
+        global $DIC;
+        $tpl = $DIC->ui()->mainTemplate();
         $cmd = self::dic()->ctrl()->getCmd(self::CMD_STANDARD);
         switch ($cmd) {
             case self::CMD_STANDARD:
@@ -55,7 +57,8 @@ class xdhtParticipantGUI
                     $this->{$cmd}();
                     break;
                 } else {
-                    ilUtil::sendFailure(ilDhbwTrainingPlugin::getInstance()->txt('permission_denied'), true);
+                    //ilUtil::sendFailure(ilDhbwTrainingPlugin::getInstance()->txt('permission_denied'), true);
+                    $tpl->setOnScreenMessage('failura',ilDhbwTrainingPlugin::getInstance()->txt('permission_denied'), false);
                     break;
                 }
         }

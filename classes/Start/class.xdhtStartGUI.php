@@ -63,6 +63,8 @@ class xdhtStartGUI
 
     protected function performCommand()
     {
+        global $DIC;
+        $tpl = $DIC->ui()->mainTemplate();
         self::dic()->tabs()->activateSubTab(ilObjDhbwTrainingGUI::TAB_START);
         $cmd = self::dic()->ctrl()->getCmd(self::CMD_STANDARD);
         switch ($cmd) {
@@ -75,7 +77,8 @@ class xdhtStartGUI
                     $this->{$cmd}();
                     break;
                 } else {
-                    ilUtil::sendFailure(ilDhbwTrainingPlugin::getInstance()->txt('permission_denied'), true);
+                    //ilUtil::sendFailure(ilDhbwTrainingPlugin::getInstance()->txt('permission_denied'), true);
+                    $tpl->setOnScreenMessage('failure',ilDhbwTrainingPlugin::getInstance()->txt('permission_denied'), true);
                     break;
                 }
         }

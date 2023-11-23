@@ -72,10 +72,13 @@ class xdhtPageObjectGUI extends ilPageObjectGUI
      */
     public function executeCommand(): string
     {
+        global $DIC;
+        $tpl = $DIC->ui()->mainTemplate();
         self::dic()->tabs()->activateSubTab(xdhtStartGUI::TAB_EDIT_PAGE);
 
         if (!self::dic()->access()->checkAccess("write", "", $this->facade->refId())) {
-            ilUtil::sendFailure(self::plugin()->translate('permission_denied'));
+            //ilUtil::sendFailure(self::plugin()->translate('permission_denied'));
+            $tpl->setOnScreenMessage('failure',self::plugin()->translate('permission_denied'), true);
 
             return self::output()->output("", true);
         }

@@ -23,27 +23,29 @@ class xdhtExportGUI extends ilExportGUI
      */
     public function __construct($a_parent_gui, $a_main_obj = null)
     {
-        global $DIC;
-
-        /** @var ilComponentFactory $component_factory */
+        global $DIC, $ilPluginAdmin;
+        $lng = $DIC->language();
+        /** @var ilComponentRepository $component_repository */
         $component_repository = $DIC["component.repository"];
 
         parent::__construct($a_parent_gui, $a_main_obj);
 
-        $this->addFormat('xml', $a_parent_gui->lng->txt('ass_create_export_file'));
-        $pl_names = $component_repository->getPluginSlotById('xdhtexp')->getActivePlugins();
+        $this->addFormat('xml', $lng->txt('ass_create_export_file'));
+
+        /*
+        $pl_names = $DIC["component.factory"]->getActivePluginsInSlot("xdht");
 
         foreach ($pl_names as $plugin) {
             /**
              * @var $plugin ilTestExportPlugin
-             */
+
             $this->addFormat(
                 $plugin->getFormat(),
                 $plugin->getFormatLabel(),
                 $plugin,
                 'export'
             );
-        }
+        }*/
     }
 
     /**
@@ -74,12 +76,14 @@ class xdhtExportGUI extends ilExportGUI
         }
 
         if (!isset($_POST['file'])) {
-            ilUtil::sendInfo($lng->txt('no_checkbox'), true);
+            //ilUtil::sendInfo($lng->txt('no_checkbox'), true);
+            $this->tpl->setOnScreenMessage('info',$lng->txt('no_checkbox'),true);
             $ilCtrl->redirect($this, 'listExportFiles');
         }
 
         if (count($_POST['file']) > 1) {
-            ilUtil::sendInfo($lng->txt('select_max_one_item'), true);
+            //ilUtil::sendInfo($lng->txt('select_max_one_item'), true);
+            $this->tpl->setOnScreenMessage('info',$lng->txt('select_max_one_item'),true);
             $ilCtrl->redirect($this, 'listExportFiles');
         }
 
@@ -137,7 +141,8 @@ class xdhtExportGUI extends ilExportGUI
                 ilUtil::delDir($exp_dir);
             }
         }
-        ilUtil::sendSuccess($lng->txt('msg_deleted_export_files'), true);
+        //ilUtil::sendSuccess($lng->txt('msg_deleted_export_files'), true);
+        $this->tpl->setOnScreenMessage('success',$lng->txt('msg_deleted_export_files'),true);
         $ilCtrl->redirect($this, 'listExportFiles');
     }
 

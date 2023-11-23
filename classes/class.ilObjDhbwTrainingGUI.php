@@ -166,7 +166,8 @@ class ilObjDhbwTrainingGUI extends ilObjectPluginGUI
                     //#SUR# do not return
                     parent::executeCommand();
                 } else {
-                    ilUtil::sendFailure(self::plugin()->translate('permission_denied'), true);
+                    //ilUtil::sendFailure(self::plugin()->translate('permission_denied'), true);
+                    $this->tpl->setOnScreenMessage('failure',self::plugin()->translate('permission_denied'), true);
                 }
                 break;
 
@@ -253,7 +254,8 @@ class ilObjDhbwTrainingGUI extends ilObjectPluginGUI
         $this->tabs->activateTab(self::TAB_SETTINGS);
         $xdhtSettingsFormGUI = new xdhtSettingsFormGUI($this, $this->facade);
         if ($xdhtSettingsFormGUI->updateObject() && $this->object->update()) {
-            ilUtil::sendSuccess(self::plugin()->translate('changes_saved_success'), true);
+            //ilUtil::sendSuccess(self::plugin()->translate('changes_saved_success'), true);
+            $this->tpl->setOnScreenMessage('success',self::plugin()->translate('changes_saved_success'), true);
             self::dic()->ctrl()->redirect($this, self::CMD_EDIT);
 
             return;
@@ -329,7 +331,8 @@ class ilObjDhbwTrainingGUI extends ilObjectPluginGUI
                     self::dic()->ctrl()->redirect(new xdhtStartGUI($this->facade), xdhtStartGUI::CMD_STANDARD);
                     break;
                 } else {
-                    ilUtil::sendFailure(ilDhbwTrainingPlugin::getInstance()->txt('permission_denied'), true);
+                    //ilUtil::sendFailure(ilDhbwTrainingPlugin::getInstance()->txt('permission_denied'), true);
+                    $this->tpl->setOnScreenMessage('failure',ilDhbwTrainingPlugin::getInstance()->txt('permission_denied'), true);
                     break;
                 }
             case self::CMD_EDIT:
@@ -339,7 +342,8 @@ class ilObjDhbwTrainingGUI extends ilObjectPluginGUI
                     $this->{$cmd}();
                     break;
                 } else {
-                    ilUtil::sendFailure(self::plugin()->translate('permission_denied'), true);
+                    //ilUtil::sendFailure(self::plugin()->translate('permission_denied'), true);
+                    $this->tpl->setOnScreenMessage('failure',self::plugin()->translate('permission_denied'), true);
                     break;
                 }
         }

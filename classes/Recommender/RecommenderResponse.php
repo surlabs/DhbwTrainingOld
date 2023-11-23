@@ -487,20 +487,26 @@ class RecommenderResponse
      */
     public function sendMessages()/*:void*/
     {
+        global $DIC;
+        $tpl = $DIC->ui()->mainTemplate();
         if (!empty($this->send_success)) {
-            ilUtil::sendSuccess(implode("<br><br>", $this->send_success), true);
+            //ilUtil::sendSuccess(implode("<br><br>", $this->send_success), true);
+            $tpl->setOnScreenMessage('success', implode("<br><br>", $this->send_success), true);
         }
 
         if (!empty($this->send_info)) {
-            ilUtil::sendInfo(implode("<br><br>", $this->send_info), true);
+            //ilUtil::sendInfo(implode("<br><br>", $this->send_info), true);
+            $tpl->setOnScreenMessage('info', implode("<br><br>", $this->send_info), true);
         }
 
         if (!empty($this->send_question)) {
-            ilUtil::sendQuestion(implode("<br><br>", $this->send_question), true);
+            //ilUtil::sendQuestion(implode("<br><br>", $this->send_question), true);
+            $tpl->setOnScreenMessage('question', implode("<br><br>", $this->send_question), true);
         }
 
         if (!empty($this->send_failure)) {
-            ilUtil::sendFailure(implode("<br><br>", $this->send_failure), true);
+            //ilUtil::sendFailure(implode("<br><br>", $this->send_failure), true);
+            $tpl->setOnScreenMessage('failure', implode("<br><br>", $this->send_failure), true);
         }
     }
 
