@@ -87,7 +87,7 @@ class xdhtPageObjectGUI extends ilPageObjectGUI
 
         $this->fixTabs();
 
-        return self::output()->output($html, true);
+        return (string)self::output()->output($html, true);
     }
 
 

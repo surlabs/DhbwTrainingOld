@@ -167,8 +167,9 @@ class MultiLineNewInputGUI extends ilFormPropertyGUI implements ilTableFilterIte
                     $input = clone $input;
 
                     $org_post_var = $input->getPostVar();
-
-                    Items::setValueToItem($input, $value[$org_post_var]);
+                    if(isset($value[$org_post_var])){ // Fix for missing values
+                        $value[$org_post_var] = Items::getValueFromItem($input);}
+                    //Items::setValueToItem($input, $value[$org_post_var]);
 
                     $post_var = $this->getPostVar() . "[" . $i . "][";
                     if (strpos($org_post_var, "[") !== false) {

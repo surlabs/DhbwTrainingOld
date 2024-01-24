@@ -74,12 +74,15 @@ class RecommenderCurl
      */
     protected function getAnonymizedUserHash() : string
     {
+        global $DIC;
 	    $alg = 'sha256'; // put new desired hashing algo here
 	    if (array_search($alg,hash_algos()) === false) {
 		    $alg = 'md5'; // Fallback to md5 if $alg not included in php
 	    }
-	    return hash($alg,Config::getField(Config::KEY_SALT) . self::dic()->user()->getId());
+
+	    return hash($alg,Config::getField(Config::KEY_SALT) . $DIC->user()->getId());
     }
+
 
 
     /**
@@ -230,7 +233,18 @@ class RecommenderCurl
             if ($this->facade->settings()->getLog()) {
                 $this->response->addSendFailure($ex->getMessage());
             } else {
-                $this->response->addSendFailure(self::plugin()->translate("error_recommender_system_not_reached"));
+                global $DIC;
+
+                $component_repository = $DIC["component.repository"];
+
+                $info = null;
+                $plugin_name = ilDhbwTrainingPlugin::PLUGIN_NAME;
+                $info = $component_repository->getPluginByName($plugin_name);
+
+                $component_factory = $DIC["component.factory"];
+
+                $plugin_obj = $component_factory->getPlugin($info->getId());
+                $this->response->addSendFailure($plugin_obj->txt("error_recommender_system_not_reached"));
             }
         } finally {
             // Close Curl connection

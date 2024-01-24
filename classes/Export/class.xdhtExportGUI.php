@@ -70,28 +70,30 @@ class xdhtExportGUI extends ilExportGUI
          * @var $ilCtrl ilCtrl
          */
         global $lng, $ilCtrl;
+        $file=array($_GET['file']);
 
         if (isset($_GET['file']) && $_GET['file']) {
-            $_POST['file'] = array($_GET['file']);
+
+            $file = array($_GET['file']);
         }
 
-        if (!isset($_POST['file'])) {
+        if (!isset($file)) {
             //ilUtil::sendInfo($lng->txt('no_checkbox'), true);
             $this->tpl->setOnScreenMessage('info',$lng->txt('no_checkbox'),true);
             $ilCtrl->redirect($this, 'listExportFiles');
         }
 
-        if (count($_POST['file']) > 1) {
+        if (count($file) > 1) {
             //ilUtil::sendInfo($lng->txt('select_max_one_item'), true);
             $this->tpl->setOnScreenMessage('info',$lng->txt('select_max_one_item'),true);
             $ilCtrl->redirect($this, 'listExportFiles');
         }
 
-        $filename = basename($_POST["file"][0]);
+        $filename = basename($file[0]);
         $exportFile = $this->getExportDirectory() . '/' . $filename;
 
         if (file_exists($exportFile)) {
-            ilUtil::deliverFile($exportFile, $filename);
+            ilUtil::deliverData($exportFile, $filename);
         }
 
         $ilCtrl->redirect($this, 'listExportFiles');
@@ -105,7 +107,7 @@ class xdhtExportGUI extends ilExportGUI
      */
     function getExportDirectory()
     {
-        $export_dir = ilUtil::getDataDir() . "/xdht_data" . "/xdht_" . $this->obj->getId() . "/export";
+        $export_dir = ilFileUtils::getDataDir() . "/xdht_data" . "/xdht_" . $this->obj->getId() . "/export";
 
         return $export_dir;
     }
