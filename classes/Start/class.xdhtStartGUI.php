@@ -226,10 +226,10 @@ class xdhtStartGUI
         /**
          * shuffle like before
          */
-        $shuffler = new ilArrayElementShuffler();
-        $shuffler->setSeed($q_gui->object->getId() + self::dic()->user()->getId());
-        $q_gui->object->setShuffle(1);
-        $q_gui->object->setShuffler($shuffler);
+       // $shuffler = new ilArrayElementShuffler();
+       // $shuffler->setSeed($q_gui->object->getId() + self::dic()->user()->getId());
+        $q_gui->object->setShuffle(true);
+       // $q_gui->object->setShuffler($shuffler);
 
         $tpl->setCurrentBlock('question');
         $tpl->setVariable('TITLE', $q_gui->object->getTitle());
@@ -282,10 +282,10 @@ class xdhtStartGUI
         /**
          * Shuffle!
          */
-        $shuffler = new ilArrayElementShuffler();
-        $shuffler->setSeed($q_gui->object->getId() + self::dic()->user()->getId());
-        $q_gui->object->setShuffle(1);
-        $q_gui->object->setShuffler($shuffler);
+        //$shuffler = new ilArrayElementShuffler();
+        //$shuffler->setSeed($q_gui->object->getId() + self::dic()->user()->getId());
+        $q_gui->object->setShuffle(true);
+        //$q_gui->object->setShuffler($shuffler);
 
         $q_gui->setPreviousSolutionPrefilled(true);
         $tpl->setCurrentBlock('question');
