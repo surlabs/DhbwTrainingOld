@@ -198,8 +198,9 @@ class ilObjDhbwTrainingGUI extends ilObjectPluginGUI
             if ($this->facade->settings()->getLearningProgress() && ilLearningProgressAccess::checkAccess($this->object->getRefId())) {
                 $this->tabs->addTab(self::TAB_LEARNING_PROGRESS,
                     self::plugin()->translate('learning_progress'),
-                    $this->ctrl->getLinkTargetByClass(array('illearningprogressgui', 'illplistofobjectsgui', 'illplistofsettingsgui', 'illearningprogressgui', 'illplistofprogressgui'), ''),
-                    '');
+                    $this->ctrl->getLinkTargetByClass(array('ilobjdhbwtraininggui','illearningprogressgui'), ''),
+                    array('illearningprogressgui', 'illplistofobjectsgui', 'illplistofsettingsgui', 'illplistofprogressgui'),
+                    );
             }
             if (ilObjDhbwTrainingAccess::hasWriteAccess()) {
                 $this->tabs->addTab(self::TAB_SETTINGS, self::plugin()->translate('settings'), $this->ctrl->getLinkTarget($this, self::CMD_EDIT));

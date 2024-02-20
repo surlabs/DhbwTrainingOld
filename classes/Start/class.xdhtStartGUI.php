@@ -415,7 +415,7 @@ class xdhtStartGUI
         $q_gui = assQuestionGUI::_getQuestionGUI("", $question['question_id']);
         if(is_object($q_gui )) {
             assQuestion::_includeClass($q_gui->getQuestionType(), 1);
-            $question_type_gui = assQuestion::getGuiClassNameByQuestionType($q_gui->getQuestionType());
+            $question_type_gui = assQuestion::_getQuestionTypeName($q_gui->getQuestionType());
 
             $ass_question = new $question_type_gui($question['question_id']);
 
