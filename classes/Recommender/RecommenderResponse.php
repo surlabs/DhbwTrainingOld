@@ -616,7 +616,7 @@ class RecommenderResponse
      */
     public function getCorrect() : bool
     {
-        return $this->correct;
+        return (bool) $this->correct;
     }
 
 

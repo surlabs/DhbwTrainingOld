@@ -199,7 +199,7 @@ class ilObjDhbwTrainingGUI extends ilObjectPluginGUI
                 $this->tabs->addTab(self::TAB_LEARNING_PROGRESS,
                     self::plugin()->translate('learning_progress'),
                     $this->ctrl->getLinkTargetByClass(array('ilobjdhbwtraininggui','illearningprogressgui'), ''),
-                    array('illearningprogressgui', 'illplistofobjectsgui', 'illplistofsettingsgui', 'illplistofprogressgui'),
+                    'illplistofprogressgui',
                     );
             }
             if (ilObjDhbwTrainingAccess::hasWriteAccess()) {
