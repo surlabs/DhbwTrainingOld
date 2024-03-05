@@ -182,7 +182,7 @@ class RecommenderCurl
             }
 
             $this->response->setProgress(null);
-            $this->response->setProgressType(strval($result['progress_type']));
+            $this->response->setProgressType("");
             if (isset($result['progress']) && !empty($result['progress_type'])) {
                 $this->response->setProgress(floatval($result['progress']));
                 $this->response->setProgressType(strval($result['progress_type']));
