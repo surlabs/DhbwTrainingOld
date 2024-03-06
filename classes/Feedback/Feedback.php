@@ -47,14 +47,14 @@ class Feedback
     {
         global $ilDB;
         $question_data = $this->facade->xdhtQuestionFactory()->getQuestionByRecomanderId($this->recomander_id);
-        $question_id = $question_data['question_id'];
-        $question_type = $question_data['question_type_fi'];
+        $question_id = $question_data['question_id'] ?? "";
+        $question_type = $question_data['question_type_fi'] ?? "";
         if (is_numeric($this->feedback)) {
             $sql = "SELECT feedback FROM qpl_fb_specific WHERE question_fi = $question_id AND answer = $this->feedback";
             $set = $ilDB->query($sql);
 
             $row = $ilDB->fetchAssoc($set);
-            $feedback = $row["feedback"];
+            $feedback = $row["feedback"] ?? "";
             if (!empty($feedback)) {
                 return $feedback;
             }
@@ -64,7 +64,7 @@ class Feedback
             $set = $ilDB->query($sql);
 
             $row = $ilDB->fetchAssoc($set);
-            $feedback = $row["feedback"];
+            $feedback = $row["feedback"] ?? "";
             if (!empty($feedback)) {
                 return $feedback;
             }
