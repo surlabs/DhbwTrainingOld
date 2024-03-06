@@ -568,7 +568,7 @@ class RecommenderResponse
 
         $progress_meter_html .= '<div class="ilBlockRow1">';
         $progress_meter_html .= '<div id="' . $progress_meter_id . '">';
-        $progress_meter_html .= self::dic()->ui()->renderer()->render($ui_element);
+        $progress_meter_html .= $DIC->ui()->renderer()->render($ui_element);
         $progress_meter_html .= '</div>';
         $progress_meter_html .= '</div>';
         $progress_meter_html .= '</div>';
