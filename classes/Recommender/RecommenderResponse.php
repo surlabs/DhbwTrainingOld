@@ -530,8 +530,9 @@ class RecommenderResponse
 
     private function getProgressMeterHtml(ProgressMeter $progress_meter)
     {
+        global $DIC;
         //$progress_meter_factory = new ProgressMeterFactory();
-        $progress_meter_factory = self::dic()->ui()->factory()->chart()->progressMeter();
+        $progress_meter_factory = $DIC->ui()->factory()->chart()->progressMeter();
         switch ($progress_meter->getProgressmeterType()) {
             case ProgressMeter::PROGRESS_METER_TYPE_MINI:
 
