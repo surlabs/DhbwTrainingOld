@@ -343,7 +343,13 @@ class xdhtStartGUI
                     /**
                      * @var QuestionAnswer $question_answer
                      */
-                    $question_answer = $question_answers->getAnswers()[$_POST['multiple_choice_result' . $_POST['question_id'] . 'ID']];
+                    $post_value = $_POST['multiple_choice_result' . $_POST['question_id'] . 'ID'];
+                    $answer_value = $question_answers->getAnswers();
+                    if (isset($answer_value[$post_value])) {
+                        $question_answer = $answer_value[$post_value];
+                    } else {
+                        $question_answer = "";
+                    }
                     if (is_object($question_answer)) {
                         $answertext = ["answertext" => base64_encode("Choice " . $question_answer->getAOrder()), "points" => $question_answer->getPoints()];
                     } else {
@@ -353,7 +359,7 @@ class xdhtStartGUI
                 case 'assMultipleChoice':
                     foreach ($_POST as $key => $value) {
                         if (strpos($key, 'multiple_choice_result') !== false) {
-                            $question_answer = $question_answers->getAnswers()[$value];
+                            $question_answer = $question_answers->getAnswers()[$value] ?? "";
                             if (is_object($question_answer)) {
                                 $answertext[] = ["answertext" => base64_encode("Choice " . $question_answer->getAOrder()), "points" => $question_answer->getPoints()];
                             } else {
@@ -368,7 +374,7 @@ class xdhtStartGUI
                         if (strpos($key, 'gap_') !== false) {
                             $value = str_replace(array(' ', ','), array('', '.'), $value);
                             $arr_splitted_gap = explode('gap_', $key);
-                            $question_answer = $question_answers->getAnswers();
+                            $question_answer = $question_answers->getAnswers() ?? [];
                             if (in_array($question_answer[$arr_splitted_gap[1]]['cloze_type'], [xdhtQuestionFactory::CLOZE_TYPE_TEXT, xdhtQuestionFactory::CLOZE_TYPE_NUMERIC])) {
                                 $answertext[] = ["gap_id" => $arr_splitted_gap[1], 'cloze_type' => 2, 'answertext' => base64_encode($value),
                                     'points' => ($question_answer[$arr_splitted_gap[1]][0]->getAnswertext() == $value) * $question_answer[$arr_splitted_gap[1]][0]->getPoints()];
