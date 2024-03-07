@@ -92,8 +92,16 @@ class RecommenderCurl
      */
     protected function doRequest(string $rest_url, array $headers, array $post_data = [])/*:void*/
     {
-
+        global $DIC;
         $curlConnection = null;
+
+        $component_repository = $DIC["component.repository"];
+        $plugin_name = ilDhbwTrainingPlugin::PLUGIN_NAME;
+        $info = $component_repository->getPluginByName($plugin_name);
+
+        $component_factory = $DIC["component.factory"];
+
+        $plugin_obj = $component_factory->getPlugin($info->getId());
 
         try {
             $curlConnection = $this->initCurlConnection($rest_url, $headers);
@@ -114,7 +122,7 @@ class RecommenderCurl
             $raw_response = $curlConnection->exec();
 
             if (empty($raw_response)) {
-                $this->response->addSendFailure(self::plugin()->translate("error_recommender_system_not_reached"));
+                $this->response->addSendFailure($plugin_obj->txt("error_recommender_system_not_reached"));
 
                 return;
             }
@@ -127,7 +135,7 @@ class RecommenderCurl
 ' . $raw_response . ' </pre>');
                 }
 
-                $this->response->addSendFailure(self::plugin()->translate("error_recommender_system_not_reached"));
+                $this->response->addSendFailure($plugin_obj->txt("error_recommender_system_not_reached"));
 
                 return;
             }
@@ -135,7 +143,8 @@ class RecommenderCurl
             if ($this->facade->settings()->getLog()) {
                 if ($this->facade->settings()->getRecommenderSystemServer() === xdhtSettingsInterface::RECOMMENDER_SYSTEM_SERVER_BUILT_IN_DEBUG) {
                     if (!empty($result['debug_server'])) {
-                        $this->response->addSendInfo('<pre>' . self::plugin()->translate("recommender_system_server_built_in_debug") . ':
+
+                        $this->response->addSendInfo('<pre>' . $plugin_obj->txt("recommender_system_server_built_in_debug") . ':
 ' . json_encode($result['debug_server'], JSON_PRETTY_PRINT) . '</pre>');
                     }
                     unset($result['debug_server']);
@@ -148,7 +157,8 @@ class RecommenderCurl
             if (!empty($result['status'])) {
                 $this->response->setStatus(strval($result['status']));
             } else {
-                $this->response->addSendFailure(self::plugin()->translate("error_recommender_system_no_status"));
+
+                $this->response->addSendFailure($plugin_obj->txt("error_recommender_system_no_status"));
 
                 return;
             }
