@@ -90,11 +90,13 @@ class ilObjDhbwTraining extends ilObjectPlugin implements ilLPStatusPluginInterf
      */
     public function doDelete(): void
     {
-        $xdht_participants = xdhtParticipant::where(array('training_obj_id' => ilObjectFactory::getInstanceByRefId($_GET['ref_id'])))->get();
-        foreach ($xdht_participants as $xdht_participant) {
-            $xdht_participant->delete();
+        if (is_int(ilObjectFactory::getInstanceByRefId($_GET['ref_id'])->get())) {
+            $xdht_participants = xdhtParticipant::where(array('training_obj_id' => ilObjectFactory::getInstanceByRefId($_GET['ref_id'])))->get();
+            foreach ($xdht_participants as $xdht_participant) {
+                $xdht_participant->delete();
+            }
+            xdhtSettings::where(array('training_obj_id' => ilObjectFactory::getInstanceByRefId($_GET['ref_id'])))->first()->delete();
         }
-        xdhtSettings::where(array('training_obj_id' => ilObjectFactory::getInstanceByRefId($_GET['ref_id'])))->first()->delete();
     }
 
 

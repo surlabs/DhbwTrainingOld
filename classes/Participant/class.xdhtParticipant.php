@@ -135,7 +135,11 @@ class xdhtParticipant extends ActiveRecord implements xdhtParticipantInterface
         $this->updated_usr_id = $ilUser->getId();
         $this->full_name = $ilUser->getFirstname() . " " . $ilUser->getLastName();
         //$this->status = ilLPStatus::LP_STATUS_NOT_ATTEMPTED_NUM;
-        parent::create();
+        try {
+            parent::create();
+        } catch (PDOException $ex) {
+            var_dump($ex->getMessage(), $this->full_name);exit;
+        }
     }
 
 
