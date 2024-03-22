@@ -360,6 +360,7 @@ class xdhtStartGUI
                     foreach ($_POST as $key => $value) {
                         //posible casting de $key a string
                         var_dump($key, $value);exit;
+
                         if (strpos($key, 'multiple_choice_result') !== false) {
                             $question_answer = $question_answers->getAnswers()[$value] ?? "";
                             if (is_object($question_answer)) {
