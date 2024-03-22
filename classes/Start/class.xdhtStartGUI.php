@@ -358,10 +358,9 @@ class xdhtStartGUI
                     break;
                 case 'assMultipleChoice':
                     foreach ($_POST as $key => $value) {
+                        //posible casting de $key a string
+                        var_dump($key, $value);exit;
                         if (strpos($key, 'multiple_choice_result') !== false) {
-
-                            var_dump($value, $question_answers->getAnswers()[$value]);exit;
-
                             $question_answer = $question_answers->getAnswers()[$value] ?? "";
                             if (is_object($question_answer)) {
                                 $answertext[] = ["answertext" => base64_encode("Choice " . $question_answer->getAOrder()), "points" => $question_answer->getPoints()];
