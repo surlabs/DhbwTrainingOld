@@ -338,6 +338,10 @@ class xdhtStartGUI
                 return;
             }
 
+            if ($question['type_tag'] != 'assSingleChoice') {
+                var_dump($question['type_tag']);exit();
+            }
+
             switch ($question['type_tag']) {
                 case 'assSingleChoice':
                     /**
@@ -359,7 +363,6 @@ class xdhtStartGUI
                 case 'assMultipleChoice':
                     foreach ($_POST as $key => $value) {
                         //posible casting de $key a string
-                        var_dump($key, $value);exit;
 
                         if (strpos($key, 'multiple_choice_result') !== false) {
                             $question_answer = $question_answers->getAnswers()[$value] ?? "";
