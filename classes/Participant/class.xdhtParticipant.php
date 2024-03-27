@@ -127,7 +127,7 @@ class xdhtParticipant extends ActiveRecord implements xdhtParticipantInterface
      */
     public function create(): void
     {
-        global $ilUser;
+        global $ilUser, $DIC;
 
         $this->created = date('Y-m-d H:i:s');
         $this->updated_status = date('Y-m-d H:i:s');
@@ -138,7 +138,7 @@ class xdhtParticipant extends ActiveRecord implements xdhtParticipantInterface
         try {
             parent::create();
         } catch (PDOException $ex) {
-            var_dump($ex->getMessage(), $this->full_name);exit;
+            $DIC()->ui()->factory()->messageBox()->failure($ex->getMessage());
         }
     }
 
