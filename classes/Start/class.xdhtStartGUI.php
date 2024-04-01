@@ -324,6 +324,7 @@ class xdhtStartGUI
 
     public function answer()
     {
+
         if ($_POST['submitted'] == 'cancel') {
             self::dic()->ctrl()->redirect($this, self::CMD_STANDARD);
         } else {
@@ -339,7 +340,7 @@ class xdhtStartGUI
             }
 
             if ($question['type_tag'] != 'assSingleChoice') {
-                var_dump($question['type_tag']);exit();
+                var_dump($question['type_tag'],$_POST);exit();
             }
 
             switch ($question['type_tag']) {
