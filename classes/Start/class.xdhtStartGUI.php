@@ -259,12 +259,17 @@ class xdhtStartGUI
     /**
      * @param array $question
      *
-     * @return ilTemplate
+     * @return ilTemplate|null
      */
-    protected function initQuestionForm($question) : ilTemplate
+    protected function initQuestionForm($question) : ?ilTemplate
     {
         $tpl = new ilTemplate('tpl.questions_form.html', true, true, 'Customizing/global/plugins/Services/Repository/RepositoryObject/DhbwTraining');
         $tpl->setVariable("ACTION", self::dic()->ctrl()->getLinkTarget($this, self::CMD_ANSWER));
+
+        //por si $question es NULL
+        if (!$question) {
+            return null;
+        }
 
         $q_gui = assQuestionGUI::_getQuestionGUI("", $question['question_id']);
 
@@ -346,6 +351,7 @@ class xdhtStartGUI
                      */
                     $post_value = $_POST['multiple_choice_result' . $_POST['question_id'] . 'ID'];
                     $answer_value = $question_answers->getAnswers();
+                    //var_dump($answer_value);exit;
                     if (isset($answer_value[$post_value])) {
                         $question_answer = $answer_value[$post_value];
                     } else {
@@ -358,21 +364,29 @@ class xdhtStartGUI
                     }
                     break;
                 case 'assMultipleChoice':
-                    var_dump($_POST);exit;
-                    foreach ($_POST as $key => $value) {
+
+                    $data = array(
+                        'multiple_choice_result_0'=> $_POST['multiple_choice_result_0'],
+                        'submitted' => $_POST['submitted'],
+                        'question_id' => $_POST['question_id'],
+                        'recomander_id' => $_POST['recomander_id']
+                    );
+
+                    foreach ($data as $key => $value) {
                         //posible casting de $key a string
                         if (strpos($key, 'multiple_choice_result') !== false) {
                             $question_answer = $question_answers->getAnswers()[$value] ?? "";
+
                             if (is_object($question_answer)) {
                                 $answertext[] = ["answertext" => base64_encode("Choice " . $question_answer->getAOrder()), "points" => $question_answer->getPoints()];
                             } else {
                                 $answertext = ["answertext" => "", "points" => 0];
                             }
+
                         }
                     }
                     break;
                 case 'assClozeTest':
-                    var_dump($_POST);exit;
                     foreach ($_POST as $key => $value) {
 
                         if (strpos($key, 'gap_') !== false) {
@@ -406,7 +420,6 @@ class xdhtStartGUI
 
             $recommender = new RecommenderCurl($this->facade, $this->response);
             $recommender->answer($_POST['recomander_id'], $question['question_type_fi'], $question['points'], $question['skills'], $answertext);
-
             $this->proceedWithReturnOfRecommender();
         }
     }

@@ -51,6 +51,11 @@ inner join qpl_qst_type on qpl_qst_type.question_type_id = qpl_questions.questio
 
         $row = $ilDB->fetchAssoc($set);
 
+        if (!$row) {
+            // No se encontraron filas, puedes retornar null o manejarlo como prefieras
+            return null;
+        }
+
         $row['recomander_id'] = $recomander_id;
         $row['skills'] = array();
 

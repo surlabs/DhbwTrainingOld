@@ -138,7 +138,7 @@ class xdhtParticipant extends ActiveRecord implements xdhtParticipantInterface
         try {
             parent::create();
         } catch (PDOException $ex) {
-            $DIC()->ui()->factory()->messageBox()->failure($ex->getMessage());
+            $DIC->ui()->factory()->messageBox()->failure($ex->getMessage());
         }
     }
 

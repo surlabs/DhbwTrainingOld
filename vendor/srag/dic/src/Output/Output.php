@@ -42,6 +42,10 @@ final class Output implements OutputInterface
             }
         } else {
             switch (true) {
+                //Null
+                case ($value === null):
+                    $html = "es null";
+                    break;
                 // HTML
                 case (is_string($value)):
                     $html = $value;
