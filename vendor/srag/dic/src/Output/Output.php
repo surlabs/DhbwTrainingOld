@@ -44,7 +44,7 @@ final class Output implements OutputInterface
             switch (true) {
                 //Null
                 case ($value === null):
-                    $html = "es null";
+                    $html = "Creemos que nos falta la pregunta. Por favor, inténtelo de nuevo.";
                     break;
                 // HTML
                 case (is_string($value)):
